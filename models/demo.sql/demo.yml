@@ -1,0 +1,37 @@
+version: 2
+
+models:
+  - name: employee
+    description: "dbt models for employee"
+    columns:
+      - name: emp_id
+        tests:
+          - unique
+          - not_null
+          - accepted_values:
+              values: ['1']
+              config:
+                severity: warn
+  - name: customer
+    description: "Dbt model for customer table"
+  - name: Customer_vw
+    description: "Dbt models for customer views"
+  - name: sales
+    description: "Dbt model for Sales table"
+
+sources:
+  - name: employee
+    database: DBT_DB
+    schema: PUBLIC
+    tables:
+      - name: EMPLOYEE_RAW
+  - name: customer
+    database: DBT_DB
+    schema: PUBLIC
+    tables:
+      - name : CUSTOMER_SRC
+  - name : sales
+    database: DBT_DB
+    schema: PUBLIC
+    tables:
+      - name : SALES_SRC
